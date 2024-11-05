@@ -5,9 +5,8 @@ async function getProducts(req, res) {
     console.log(" Test")
     try {
 
-        const limit = parseInt(req.query.limit)  || 10;
+        const limit = parseInt(req.query.limit)  || 3;
         const skip = parseInt(req.query.skip) || 0;
-
         const filter = [];
 
         if(req.query.name) {

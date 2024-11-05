@@ -30,7 +30,7 @@ async function createCategories(req, res) {
     } catch (error) {
         console.log(error)
         return res.status(500).send({
-            message: "Error al crear categorias"
+            message: "Error al crear categorias" 
         })
     }
 }

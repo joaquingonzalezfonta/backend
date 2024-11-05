@@ -14,7 +14,7 @@ const productSchema = new Schema({
     description: String,
     category: String,
     image: String,
-    createAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
     active: { type: Boolean, default: true},
     // updateAt: { type: Date, default: Date.now },
 })
