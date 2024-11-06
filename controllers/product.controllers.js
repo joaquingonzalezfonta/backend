@@ -66,10 +66,30 @@ async function createProduct(req, res) {
 
     }
 
+async function getProductById(req, res) {
+    try {
+        const { id } = req.params;
+
+        const product = await Product.findById(id);
+
+        if(!product) {
+            return res.status(404).send("El producto no fue encontrado")
+        }
+
+        console.log(product)
+
+        return res.status(200).send(product)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Error al obtener producto en la DB")
+    }
+}
+
 
 
 
 module.exports = {
     getProducts,
-    createProduct
+    createProduct,
+    getProductById
 }

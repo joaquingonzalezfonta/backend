@@ -20,7 +20,7 @@ function validation(req, res, next) {
         if(error) {
             console.log(error)
             return res.status(401).send({
-                message: "N tiene autorizacion para acceder aqui"
+                message: "No tiene autorizacion para acceder aqui"
             })
         }
 

@@ -7,7 +7,7 @@ const upload = require('../middlewares/uploadFile');
 router.get("/products", productController.getProducts)
 
 // Obtener procducto por ID 
-
+router.get("/products/:id", productController.getProductById)
 // Crear producto 
 router.post("/products",[upload], productController.createProduct)
                         // [validation, isAdmin, upload]
