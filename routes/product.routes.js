@@ -8,22 +8,16 @@ router.get("/products", productController.getProducts)
 
 // Obtener procducto por ID 
 router.get("/products/:id", productController.getProductById)
+
 // Crear producto 
 router.post("/products",[upload], productController.createProduct)
                         // [validation, isAdmin, upload]
+
 // Actualizar producto
+router.put("/products/:id", productController.updateProduct)
 
 // Borrar producto
-
-
-
-
-
-
-
-
-
-
+router.delete("/products/:id", productController.deleteProduct);
 
 
 module.exports = router;

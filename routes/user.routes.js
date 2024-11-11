@@ -16,5 +16,5 @@ router.delete("/users/:deleteID", [validation, isAdmin], userControllers.deleteU
 router.put("/users/:updateID", [validation], userControllers.updateUser)
 // Login para autenticar un usuario
 router.post("/login", userControllers.login)
-// Devovemos router para que se pueda usar en otros archivos
+// Devolvemos router para que se pueda usar en otros archivos
 module.exports = router;

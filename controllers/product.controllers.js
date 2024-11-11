@@ -85,11 +85,57 @@ async function getProductById(req, res) {
     }
 }
 
+async function deleteProduct(req, res) {
+    try {
+
+        const { id } = req.params
+
+        const deleteProduct = await Product.findByIdAndDelete(id)
+        return res.status(200).send({
+            ok: true,
+            message: "El producto fue borrado correctamente",
+            deleteProduct
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            ok: false,
+            message: "Error al borrar el producto"
+        })
+    }
+}
+
+async function updateProduct(req, res) {
+    try {
+        const { id } = req.params 
+
+        const product = await Product.findByIdAndUpdate(id, req.body, { new: true })
+
+        console.log(product)
+
+        return res.status(200).send({
+            ok: true,
+            message: "Usuario actualizado correctamente",
+            product
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            ok: false,
+            message: "Error al actualizar producto"
+        })
+    }
+}
+
 
 
 
 module.exports = {
     getProducts,
     createProduct,
-    getProductById
+    getProductById,
+    deleteProduct,
+    updateProduct
 }

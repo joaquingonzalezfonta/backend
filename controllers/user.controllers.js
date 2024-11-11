@@ -95,6 +95,13 @@ async function deleteUser(req, res) {
 
     try {
 
+        // if(req.user.role !== "admin") {
+        //     return res.status(401).send({
+        //         ok: false,
+        //         message: "No tienes permiso para borrar usuarios"
+        //     })
+        // }
+
         const { deleteID } = req.params
 
         const deletedUser = await User.findByIdAndDelete(deleteID)
