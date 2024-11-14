@@ -5,7 +5,7 @@ async function getProducts(req, res) {
     console.log(" Test")
     try {
 
-        const limit = parseInt(req.query.limit)  || 3;
+        const limit = parseInt(req.query.limit)  || 10;
         const skip = parseInt(req.query.skip) || 0;
         const filter = [];
 
@@ -20,7 +20,7 @@ async function getProducts(req, res) {
         const query = filter.length > 0 ? { $and: filter } : {};
 
         const products = await Product.find(query)
-        .select({description: 0, __v: 0})
+        .select({__v: 0})
         .sort({name: 1})
         .collation({locale: 'es'})
         .limit(limit)
@@ -83,7 +83,7 @@ async function getProductById(req, res) {
         console.log(error);
         return res.status(500).send("Error al obtener producto en la DB")
     }
-}
+} 
 
 async function deleteProduct(req, res) {
     try {
@@ -110,14 +110,20 @@ async function updateProduct(req, res) {
     try {
         const { id } = req.params 
 
-        const product = await Product.findByIdAndUpdate(id, req.body, { new: true })
+        const product = req.body;
 
-        console.log(product)
+        if(req.file) {
+            product.image = req.file.filename;
+        }
+
+        const productUpdate = await Product.findByIdAndUpdate(id, req.body, { new: true })
+
+        console.log(productUpdate)
 
         return res.status(200).send({
             ok: true,
             message: "Usuario actualizado correctamente",
-            product
+            productUpdate
         })
 
     } catch (error) {

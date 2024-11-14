@@ -14,7 +14,7 @@ router.post("/products",[upload], productController.createProduct)
                         // [validation, isAdmin, upload]
 
 // Actualizar producto
-router.put("/products/:id", productController.updateProduct)
+router.put("/products/:id", [upload], productController.updateProduct)
 
 // Borrar producto
 router.delete("/products/:id", productController.deleteProduct);

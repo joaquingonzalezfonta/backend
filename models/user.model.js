@@ -33,11 +33,15 @@ const userSchema = new Schema({
         maxlength: 80, 
         trim: true 
     },
-    bornDate: { 
+    birthdate: { 
         type: String,
         required: true,
     },
-    location: { 
+    number: { 
+        type: String,
+        required: true,
+    },
+    province: { 
         type: String,
         required: true, 
         minlength: 3,
@@ -57,4 +61,4 @@ const userSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoose.model('User', userSchema)

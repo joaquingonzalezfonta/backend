@@ -9,7 +9,7 @@ async function getUsers(req, res) {
 
     try {
 
-        const users = await User.find(); // asyncrono
+        const users = await User.find().select({password: 0}); // asyncrono
 
         console.log(users)
 
@@ -102,14 +102,14 @@ async function deleteUser(req, res) {
         //     })
         // }
 
-        const { deleteID } = req.params
+        const { id } = req.params
 
-        const deletedUser = await User.findByIdAndDelete(deleteID)
+        const deleteUser = await User.findByIdAndDelete(id)
 
         return res.status(200).send({
             ok: true,
             message: "El usuario fue borrado correctamente",
-            deletedUser
+            deleteUser
         })
 
     } catch (error) {
@@ -125,9 +125,15 @@ async function deleteUser(req, res) {
 async function updateUser(req, res) {
     try {
 
-        const { updateID } = req.params
+        const { id } = req.params
 
-        if(req.user.role !== "admin" && updateID !== req.user._id) {
+        const user = req.body;
+
+        if(req.file) {
+            user.image = req.file.filename;
+        }
+
+        if(req.user.role !== "admin" && id !== req.user._id) {
             return res.status(403).send({
                 message: "No tienes permisos para actualizar este usuario"
             })
@@ -135,12 +141,12 @@ async function updateUser(req, res) {
 
         // TODO: Remover la propiedad password del body
 
-        const user = await User.findByIdAndUpdate(updateID, req.body, { new: true })
+        const userUpdate = await User.findByIdAndUpdate(id, req.body, { new: true })
                                                 // La opcion new: true me devuelve el usuario actualizado
         return res.status(200).send({
             ok: true,
             message: "Usuario actualizado correctamente",
-            user
+            userUpdate
         })
 
     } catch (error) {

@@ -25,8 +25,9 @@ async function createCategories(req, res) {
 
         return res.status(201).send({
             message: "Categoria creada correctamente",
-            category
+            category: category
         })
+
     } catch (error) {
         console.log(error)
         return res.status(500).send({
@@ -35,4 +36,25 @@ async function createCategories(req, res) {
     }
 }
 
-module.exports = { getCategories, createCategories}
+async function deleteCategory(req, res) {
+    try {
+
+        const { id } = req.params
+
+        const deleteCategory = await Category.findByIdAndDelete(id)
+        return res.status(200).send({
+            ok: true,
+            message: "La categoria fue borrada correctamente",
+            deleteCategory
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            ok: false,
+            message: "Error al borrar la categoria"
+        })
+    }
+}
+
+module.exports = { getCategories, createCategories, deleteCategory}

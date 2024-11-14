@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
 const Schema = mongoose.Schema
+
 const categorySchema = new Schema({
     name: { type: String, required: true },
     viewValue: { type: String, require: true },
@@ -9,4 +9,4 @@ const categorySchema = new Schema({
 
 
 
-module.exports = mongoose.modelNames('Category', categorySchema)
+module.exports = mongoose.model("Category", categorySchema)
