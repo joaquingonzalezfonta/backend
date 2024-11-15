@@ -43,9 +43,11 @@ const userSchema = new Schema({
     },
     province: { 
         type: String,
-        required: true, 
-        minlength: 3,
-        maxlength: 100
+        required: true,
+    },
+    comentary: { 
+        type: String,
+        maxlength: 300
     },
     image: { 
         type: String,
