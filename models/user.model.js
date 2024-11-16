@@ -45,6 +45,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    budget: { 
+        type: String,
+        required: true,
+    },
     comentary: { 
         type: String,
         maxlength: 300
