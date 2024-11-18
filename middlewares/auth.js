@@ -3,12 +3,8 @@ const SECRET = process.env.SECRET;
 
 function validation(req, res, next) {
 
-    // Si el tokn viene con el squema Bearer vamos a separar el token de la palabra Bearer
-    // const token = req.headers.authorization.split(" ")[1];
-
     const token = req.headers.authorization;
 
-    // Si no viene el token devolvemos un mensaje de error
     if (!token) {
         return res.status(401).send({
             message: "No tiene autorizacion para acceder a este endpoint"
@@ -24,7 +20,6 @@ function validation(req, res, next) {
             })
         }
 
-        // En el payload se encuentra la informacion del usuario sin modificar
         console.log(payload)
 
         req.user = payload;

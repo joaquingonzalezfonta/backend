@@ -13,11 +13,11 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        trim: true, // Quita los espacios adelante y atras
+        trim: true, 
         minlength: 5,
         maxlength: 100,
-        unique: true, // Otro usuario no va a poder utilizar este correo
-        index: true,// Arma un indice de usuarios mediante el mail
+        unique: true, 
+        index: true,
         validate: {
             validator: (value) => {
                 const regex = /^[A-Za-z0-9._+\-']+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/

@@ -3,13 +3,12 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
-// Funciones para manejar distintas peticiones
 
 async function getUsers(req, res) {
 
     try {
 
-        const users = await User.find().select({password: 0}); // asyncrono
+        const users = await User.find().select({password: 0}); 
 
         console.log(users)
 
@@ -60,7 +59,6 @@ async function createUser(req, res) {
     })
 }
 
-// Funcion para obtener un usuario especifico
 async function getUserById(req, res) {
     try {
         const { id } = req.params;
@@ -94,17 +92,9 @@ async function getUserById(req, res) {
     }
 }
 
-// Funcion borrar usuario
 async function deleteUser(req, res) {
 
     try {
-
-        // if(req.user.role !== "admin") {
-        //     return res.status(401).send({
-        //         ok: false,
-        //         message: "No tienes permiso para borrar usuarios"
-        //     })
-        // }
 
         const { id } = req.params
 
@@ -125,7 +115,7 @@ async function deleteUser(req, res) {
     }
 }
 
-// Actualizar usuario
+
 async function updateUser(req, res) {
     try {
 
@@ -143,10 +133,7 @@ async function updateUser(req, res) {
             })
         }
 
-        // TODO: Remover la propiedad password del body
-
         const userUpdate = await User.findByIdAndUpdate(id, req.body, { new: true })
-                                                // La opcion new: true me devuelve el usuario actualizado
         return res.status(200).send({
             ok: true,
             message: "Usuario actualizado correctamente",
@@ -184,15 +171,12 @@ async function login(req, res) {
 
         const match = await bcrypt.compare(password, user.password)
 
-        // console.log(" Compare match", match);
-
         if(!match) {
             return res.status(400).send({
                 message: "Alguno de los datos es incorrecto"
             })
         }
 
-        // Eliminar la propiedad password
         user.password = undefined;
         user.__v = undefined;
 
